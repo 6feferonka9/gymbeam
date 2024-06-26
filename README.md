@@ -2,10 +2,10 @@
 
 I did put a lot of commentsto the code as explanation of some of the decisions I made.
 
-I have to add [] before each Query parameter because API does not support non-array multiselect values, which breaks the other values like checkbox that are not an array.  
-This is an API issue and I had to do a workaround, API should accept a non array value like: manufacturer=gymbeam.  
+First note I would have is that API cannot process single values like: manufacturer=gymbeam  
+and they always have to be an array like: manufacturer[]=gymbeam which creates an issues and I had to do a hacky solution, which is that I named the multiselect components name[], with the brackets.   
 Others formats like 'a=b&a=c' or 'a=b,c' do not seem to be working either.  
-But maybe I just missed something.  
+I think this is a bad practice and this should be adressed on API, but maybe, I am just missing something and there is a simple solution to my problem.
 
 What I did not like by visiting https://gymbeam.com/sports-nutrition is that if I select something in the filter, it automatically starts to filter and the filter component closes.  
 I find frustrating, because maybe I want to choose multiple filters at once.  

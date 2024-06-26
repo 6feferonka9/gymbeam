@@ -33,7 +33,7 @@ function InternalMultiselect({ filter, searchValues }: { filter: ApiFilterMultis
     <Select id={filter.code}
       instanceId={filter.code}
       defaultValue={formatDefaultValues()}
-      name={filter.code}
+      name={`${filter.code}[]`}
       className="w-[170px]"
       placeholder={filter.name}
       key={filter.code}
@@ -63,7 +63,7 @@ export default function CategoryFiltering({ categoryData, searchParams }: { cate
         <form className="flex flex-wrap gap-2" onSubmit={() => { setIsSubmitting(true) }}>
           {categoryData.map(filter => {
             if (filter.type === 'multiselect') {
-              return <InternalMultiselect filter={filter} searchValues={searchParams[filter.code]} key={filter.code}></InternalMultiselect>
+              return <InternalMultiselect filter={filter} searchValues={searchParams[`${filter.code}[]`]} key={filter.code}></InternalMultiselect>
             }
 
             if (filter.type === 'checkbox') {

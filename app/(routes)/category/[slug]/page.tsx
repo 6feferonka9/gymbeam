@@ -31,21 +31,21 @@ async function loadCategoryData(slug: string | undefined, searchParams: Record<s
 
   if (slug in CATEGORY_ID_MAP) {
     // I have to update the values to be an array so its digested by an API
-    const formatedSearchParamsObject = Object.entries(searchParams).reduce((prev, cur) => {
-      const value = cur[1];
-
-      if (value === '') return prev;
+    const removeEmptyValuesFromSearchParams = Object.entries(searchParams).reduce((prev, cur) => {
+      if(cur[1] === '') return prev;
 
       return {
         ...prev,
-        [cur[0]]: Array.isArray(value) ? value : [value]
+        [cur[0]]: cur[1]
       }
-    }, {});
+    }, {})
 
     //if the object contains key, we can assume it exists, but additional checks can be done
     const slugCasted = slug as keyof typeof CATEGORY_ID_MAP;
     const categoryId = CATEGORY_ID_MAP[slugCasted].toString();
-    const stringifiedSearchParams: string = qs.stringify(formatedSearchParamsObject, { arrayFormat: 'brackets', encodeValuesOnly: true, allowEmptyArrays: false, skipNulls: true });
+    const stringifiedSearchParams: string = qs.stringify(removeEmptyValuesFromSearchParams, { arrayFormat: 'repeat', encodeValuesOnly: true, allowEmptyArrays: false, skipNulls: true });
+
+    console.log({stringifiedSearchParams})
 
     const apiResponse = await apiRequestHandler<ApiCategoryResponse>(`/gb/catalog/products?category_ids[]=${categoryId}&${stringifiedSearchParams}`);
 
