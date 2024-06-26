@@ -7,12 +7,12 @@ This is an API issue and I had to do a workaround, API should accept a non array
 Others formats like 'a=b&a=c' or 'a=b,c' do not seem to be working either.  
 But maybe I just missed something.  
 
-What I did not like by visiting https://gymbeam.com/sports-nutrition is that if I select something in the filter, it automatically starts to filter  
-and the filter component closes, which I find frustrating, because maybe I want to choose multiple filters at once.  
+What I did not like by visiting https://gymbeam.com/sports-nutrition is that if I select something in the filter, it automatically starts to filter and the filter component closes.  
+I find frustrating, because maybe I want to choose multiple filters at once.  
 Therefore, I added a button for "search".  
-I realize that options update by filters, its kinda difficult to know how at this moment (I dont have enough insight) to display this property to   
-try to minimize incorrect combinations like "BCAA" (main category) and "Sypané čaje". Maybe a good solution would be to have more selective category subpages like:  
-/proteins, /bcaas, /multivitamins and then have specific filtering.  
+I realize, that options update by selected filters, it is difficult to know how at this moment (I dont have enough insight) how to handle this and to try to minimize incorrect combinations like "BCAA" (main category) and "Sypané čaje".  
+A good solution in my opinion would be to have more selective category subpages like:  
+/proteins, /bcaas, /multivitamins and then have specific filtering for each.  
 
 The filtering is just simple HTML form, no need for any state management.   
 NextJS will cache the HTML and JS and the data are fetched and rendered on the Server.  
