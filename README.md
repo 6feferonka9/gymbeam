@@ -1,8 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Gymbeam Case study
+
+I did put a lot of commentsto the code as explanation of some of the decisions I made.
+
+I have to add [] before each Query parameter because API does not support non-array multiselect values, which breaks the other values like checkbox that are not an array.
+This is an API issue and I had to do a workaround, API should accept a non array value like: manufacturer=gymbeam.
+Others formats like 'a=b&a=c' or 'a=b,c' do not seem to be working either.
+But maybe I just missed something.
+
+What I did not like by visiting https://gymbeam.com/sports-nutrition is that if I select something in the filter, it automatically starts to filter
+and the filter component closes, which I find frustrating, because maybe I want to choose multiple filters at once.
+Therefore, I added a button for "search".
+I realize that options update by filters, its kinda difficult to know how at this moment (I dont have enough insight) to display this property to 
+try to minimize incorrect combinations like "BCAA" (main category) and "Sypané čaje". Maybe a good solution would be to have more selective category subpages like:
+/proteins, /bcaas, /multivitamins and then have specific filtering.
+
+The filtering is just simple HTML form, no need for any state management. 
+NextJS will cache the HTML and JS and the data are fetched and rendered on the Server.
+Users are getting SSR page. If I would implement pagination, I would propagate the results from server to client,
+and in this case yes, I would very likely use client side fetching (just for pagination) for better user experience.
+
+About the UI, I choose shadcn to give it just a little bit of visual and component functionality and used Tailwind for some simple styling.
+
+I did not do much styling for filtering, there are many filters, my worry would be that it would not fit on some mobile devices.
+There are some UI "fixes" that could be done. I would probably choose sidebar filtering, that slides out, like this (can be scrollable):
+https://cdn.prod.website-files.com/65d605a3b4417479c154329f/65e81ef31447ffdcbef0e904_See-moreless.gif
+This design also could be used on desktop, which imho provide a good user experience and is not mixed with product results.
+
+This code is reusable and could be used for any category page with filtering (if there are no breaking features I am not aware of).
 
 ## Getting Started
 
-First, run the development server:
+Create .env.local and set the variable: GYMBEAM_API=https://gymbeam.sk/rest/V1
+
+Install packages bun install (or use other package manager).
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -15,22 +47,3 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
